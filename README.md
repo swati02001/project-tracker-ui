@@ -14,10 +14,11 @@ https://github.com/swati02001/project-tracker-ui
 ---
 
 ## ⚙️ Setup Instructions
-
 ```bash
 npm install
 npm run dev
+
+
 
 **Tech Stack**
 
