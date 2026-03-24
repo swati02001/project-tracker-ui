@@ -20,7 +20,7 @@ npm run dev
 
 
 
-**Tech Stack**
+## Tech Stack
 
 - React
 - TypeScript
