@@ -1,73 +1,92 @@
-# React + TypeScript + Vite
+# 🚀 Project Tracker UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully functional multi-view project management frontend built using React + TypeScript.  
+The application supports Kanban, List, and Timeline views over a shared dataset with custom drag-and-drop, virtual scrolling, filtering, and simulated collaboration.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🔗 Live Demo
+https://project-tracker-ui-murex.vercel.app
 
-## React Compiler
+## 📂 Repository
+https://github.com/swati02001/project-tracker-ui
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ⚙️ Setup Instructions
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+npm install
+npm run dev
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Tech Stack**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React
+- TypeScript
+- Zustand (State Management)
+- Tailwind CSS
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**State Management Decision**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- I chose Zustand for state management because the application requires a single shared dataset across multiple views (Kanban, List, Timeline), along with filters, drag-and-drop updates, and collaboration indicators.
+- Zustand provides a lightweight global store with minimal boilerplate, making it easier to manage shared state without prop drilling. It keeps updates predictable and ensures all views stay synchronized in real-time when tasks are modified.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**Virtual Scrolling Implementation**
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The List view uses a custom-built virtual scrolling system without external libraries.
+Instead of rendering all tasks, the implementation calculates:
+- Current scroll position
+- Visible row range
+- Buffer rows above and below
+Only visible rows are rendered, while a spacer container maintains the full scroll height. This ensures:
+- Smooth scrolling
+- No UI lag
+- Efficient rendering even with 500+ tasks
+
+**Drag-and-Drop Approach**
+
+Drag-and-drop in the Kanban view is implemented using native browser drag events.
+- Each card sets its taskId using dataTransfer on drag start
+- Columns act as drop zones using onDragOver and onDrop
+- On drop, the task status is updated in Zustand
+- The UI re-renders instantly with the updated state
+No external libraries were used, ensuring full control over the interaction.
+
+**Features**
+
+- Kanban Board with 4 columns
+- List View with sorting (Title, Priority, Due Date)
+- Timeline (Gantt-style) with current date indicator
+- Custom drag-and-drop (no libraries)
+- Virtual scrolling for performance (500+ tasks)
+- Filters (status, priority, assignee, date range)
+- URL-synced filters & view state
+- Simulated real-time collaboration indicators
+- Inline status update in List view
+- Seed data generator (500 tasks)
+- Empty states for filtered/no-result scenarios
+
+**Future Improvements**
+
+- Add drag placeholder to fully eliminate layout shift
+- Add smooth snap-back animation for invalid drops
+- Improve mobile responsiveness
+- Add pointer/touch support for drag-and-drop
+- Strengthen TypeScript typing across components
+
+**Requirements Covered**
+
+- Multi-view shared dataset
+- Custom drag-and-drop (no libraries)
+- Virtual scrolling (no libraries)
+- Timeline/Gantt view
+- Filters with URL sync
+- Collaboration indicators
+- Empty states & edge cases
+- 500+ task generator
+- Performance optimization
+
+**Author**
+
+Swati Verma
+Frontend Developer
