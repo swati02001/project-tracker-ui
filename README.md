@@ -66,6 +66,26 @@ No external libraries were used, ensuring full control over the interaction.
 - Seed data generator (500 tasks)
 - Empty states for filtered/no-result scenarios
 
+**Folder Structure**
+
+src/
+ ├── components/
+ │   ├── Kanban/
+ │   ├── List/
+ │   ├── Timeline/
+ │   └── Common/
+ ├── pages/
+ ├── store/
+ ├── hooks/
+ ├── utils/
+
+**Performance Considerations**
+
+- Virtual scrolling reduces DOM size
+- useMemo prevents unnecessary re-renders
+- Zustand ensures lightweight state updates
+- Efficient filtering logic across views
+
 **Future Improvements**
 
 - Add drag placeholder to fully eliminate layout shift
