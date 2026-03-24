@@ -80,21 +80,6 @@ This approach helped me understand how drag-and-drop works internally.
 
 ---
 
-##  Folder Structure
-
-src/
-├── components/
-│ ├── Kanban/
-│ ├── List/
-│ ├── Timeline/
-│ └── Common/
-├── pages/
-├── store/
-├── hooks/
-├── utils/
-
----
-
 ##  Performance Considerations
 
 - Virtual scrolling reduces unnecessary DOM rendering  
